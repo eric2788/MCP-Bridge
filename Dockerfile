@@ -1,4 +1,5 @@
-FROM python:3.12-bullseye
+ARG TARGETPLATFORM
+FROM --platform=$BUILDPLATFORM python:3.12-bullseye
 
 # install uv to run stdio clients (uvx)
 RUN pip install --no-cache-dir uv
