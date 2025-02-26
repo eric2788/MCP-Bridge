@@ -1,7 +1,7 @@
 ARG TARGETPLATFORM
-FROM --platform=$BUILDPLATFORM python:3.12-bullseye
-
-# install curl, qemu-user-static
+FROM --platform=$BUILDPLATFORM python:3.12-slim
+USER root
+# install curl
 RUN apt-get update && apt-get install -y git curl
 
 # install nodejs
@@ -24,4 +24,4 @@ COPY mcp_bridge mcp_bridge
 EXPOSE 8000
 
 WORKDIR /mcp_bridge
-ENTRYPOINT ["uv", "run", "main.py"]
+ENTRYPOINT ["/root/.local/bin/uv", "run", "main.py"]
