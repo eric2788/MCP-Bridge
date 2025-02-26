@@ -1,5 +1,5 @@
 ARG TARGETPLATFORM
-FROM --platform=$BUILDPLATFORM python:3.12-slim
+FROM --platform=$TARGETPLATFORM python:3.12-slim
 USER root
 # install curl
 RUN apt-get update && apt-get install -y git curl
