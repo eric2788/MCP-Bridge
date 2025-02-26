@@ -9,7 +9,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install
 
 # install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-RUN export PATH=/root/.local/bin:$PATH
+ENV PATH=/root/.local/bin:$PATH
 
 COPY pyproject.toml .
 
