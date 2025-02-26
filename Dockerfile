@@ -1,9 +1,11 @@
 ARG TARGETPLATFORM
 FROM --platform=$BUILDPLATFORM python:3.12-bullseye
 
-# install curl, qemu-user-static, and nodejs
-RUN apt-get update && apt-get install -y --no-install-recommends curl qemu-user-static
- curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y --no-install-recommends nodejs
+# install curl, qemu-user-static
+RUN apt-get update && apt-get install -y curl qemu-user-static
+
+# install nodejs
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y --no-install-recommends nodejs
 
 # install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
