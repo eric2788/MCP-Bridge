@@ -2,12 +2,15 @@ ARG TARGETPLATFORM
 FROM --platform=$BUILDPLATFORM python:3.12-bullseye
 
 # install uv to run stdio clients (uvx)
-RUN pip install --no-cache-dir uv
+RUN pip install --no-cache-dir uv --platform=$TARGETPLATFORM
 
 # install npx to run stdio clients (npx)
 RUN apt-get update && apt-get install -y --no-install-recommends curl
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y --no-install-recommends nodejs
+
+# install qemu-user-static for multi-platform builds
+RUN apt-get update && apt-get install -y qemu-user-static
     
 COPY pyproject.toml .
 
