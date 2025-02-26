@@ -9,7 +9,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install
 
 # install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-RUN export PATH=$HOME/.local/bin:$PATH
+ENV PATH=$HOME/.local/bin:$PATH
 
 COPY pyproject.toml .
 
@@ -17,7 +17,7 @@ COPY pyproject.toml .
 COPY mcp_bridge/__init__.py mcp_bridge/__init__.py
 COPY README.md README.md
 
-RUN $HOME/.local/bin/uv sync
+RUN uv sync
 
 COPY mcp_bridge mcp_bridge
 
