@@ -1,5 +1,5 @@
 ARG TARGETPLATFORM
-FROM --platform=$BUILDPLATFORM python:3.12-bullseye
+FROM --platform=$BUILDPLATFORM python:3.12-slim
 
 # install curl, qemu-user-static
 RUN apt-get update && apt-get install -y curl qemu-user-static
@@ -9,6 +9,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install
 
 # install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+RUN source $HOME/.local/bin/env
 
 COPY pyproject.toml .
 
