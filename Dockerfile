@@ -2,7 +2,7 @@ ARG TARGETPLATFORM
 FROM --platform=$BUILDPLATFORM python:3.12-bullseye
 
 # install uv to run stdio clients (uvx)
-RUN pip install --no-cache-dir uv --platform=$TARGETPLATFORM --no-deps
+RUN pip install --no-cache-dir uv --platform=$TARGETPLATFORM --no-deps --target /usr/local/lib/python3.12/site-packages
 
 # install npx to run stdio clients (npx)
 RUN apt-get update && apt-get install -y --no-install-recommends curl
