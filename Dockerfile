@@ -1,5 +1,4 @@
-ARG TARGETPLATFORM
-FROM --platform=$TARGETPLATFORM python:3.12-slim
+FROM python:3.12-bullseye
 
 # install curl
 RUN apt-get update && apt-get install -y git curl
