@@ -1,23 +1,16 @@
 ARG TARGETPLATFORM
 FROM --platform=$BUILDPLATFORM python:3.12-bullseye
 
-# install uv to run stdio clients (uvx)
-RUN pip install --no-cache-dir uv --platform=$TARGETPLATFORM --no-deps --target /usr/local/lib/python3.12/site-packages
+# install uv, curl, nodejs, and qemu-user-static
+RUN apt-get update && apt-get install -y --no-install-recommends uv curl qemu-user-static && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y --no-install-recommends nodejs
 
-# install npx to run stdio clients (npx)
-RUN apt-get update && apt-get install -y --no-install-recommends curl
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get install -y --no-install-recommends nodejs
-
-# install qemu-user-static for multi-platform builds
-RUN apt-get update && apt-get install -y qemu-user-static
-    
 COPY pyproject.toml .
 
 ## FOR GHCR BUILD PIPELINE
 COPY mcp_bridge/__init__.py mcp_bridge/__init__.py
 COPY README.md README.md
-
 
 RUN uv sync
 
