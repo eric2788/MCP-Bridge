@@ -17,7 +17,7 @@ COPY pyproject.toml .
 COPY mcp_bridge/__init__.py mcp_bridge/__init__.py
 COPY README.md README.md
 
-RUN uv sync
+RUN $HOME/.local/bin/uv sync
 
 COPY mcp_bridge mcp_bridge
 
